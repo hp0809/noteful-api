@@ -3,7 +3,9 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
-const { NODE_ENV } = require('./config')
+const { NODE_ENV } = require('./config');
+const NotefulNotesRouter = require('./notes/NotefulNotesRouter');
+const NotefulFolderRouter = require('./folders/NotefulFoldersRouter');
 
 const app = express();
 
@@ -15,9 +17,8 @@ app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send('Hello, world!')
-})
+app.use('/noteful/api/folders', NotefulFolderRouter);
+app.use('/noteful/api/notes', NotefulNotesRouter);
 
 app.use(function errorHandler(error, req, res, next) {
     let response
