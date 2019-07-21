@@ -38,3 +38,26 @@
 {"message":"Note with id 15 created.","level":"info"}
 {"message":"Note with id 16 created.","level":"info"}
 {"message":"Note with id 17 created.","level":"info"}
+{"message":"Note with id 1 deleted.","level":"info"}
+{"message":"Note with id 2 deleted.","level":"info"}
+{"message":"Note with id 16 deleted.","level":"info"}
+{"message":"Folder with id 17 deleted.","level":"info"}
+{"message":"Folder with id 16 deleted.","level":"info"}
+{"message":"Folder with id 15 deleted.","level":"info"}
+{"message":"Folder with id 14 deleted.","level":"info"}
+{"message":"Folder with id 11 deleted.","level":"info"}
+{"message":"Folder with id 4 deleted.","level":"info"}
+{"message":"Folder with id 5 deleted.","level":"info"}
+{"message":"Folder with id 6 deleted.","level":"info"}
+{"message":"Folder with id 7 deleted.","level":"info"}
+{"message":"Folder with id 8 deleted.","level":"info"}
+{"message":"Folder with id 9 deleted.","level":"info"}
+{"message":"Folder with id 10 deleted.","level":"info"}
+{"message":"Folder with id 11 deleted.","level":"info"}
+{"message":"Note with id 6 deleted.","level":"info"}
+{"message":"Note with id 7 deleted.","level":"info"}
+{"message":"Note with id 14 deleted.","level":"info"}
+{"message":"Note with id 11 deleted.","level":"info"}
+{"message":"Folder with id 4 & Hello created.","level":"info"}
+{"message":"Folder with id 5 &  created.","level":"info"}
+{"message":"Folder with id 5 deleted.","level":"info"}

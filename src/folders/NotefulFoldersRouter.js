@@ -73,6 +73,19 @@ NotefulFoldersRouter
                     res.json(folder)
                 })
                 .catch(next)
-    })    
+    })
+    .delete((req, res, next) => {
+        const { folderId } = req.params;
+        console.log(req.params)
+        FoldersService.deleteFolder(
+          req.app.get('db'),
+          folderId
+        )
+          .then(folder => {
+            logger.info(`Folder with id ${folderId} deleted.`)
+            res.status(204).end()
+          })
+          .catch(next)
+      })    
 
     module.exports = NotefulFoldersRouter;

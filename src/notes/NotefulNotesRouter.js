@@ -20,6 +20,7 @@ NotefulNotesRouter
     
     .get((req, res, next) => {
     const knexInstance = req.app.get('db')
+    console.log(req.params)
     NotesService.listNotes(knexInstance)
         .then(notes => {
             res.json(notes)
@@ -60,6 +61,7 @@ NotefulNotesRouter
 
     .get((req, res, next) => {
     const knexInstance = req.app.get('db')
+    console.log(req.params)
     NotesService.getNoteById(knexInstance, req.params.note_id)
         .then(note => {
             if(!note) {
@@ -72,14 +74,15 @@ NotefulNotesRouter
         .catch(next)
     })
 
-    .delete(bodyParser,(req, res, next) => {
-        const { id } = req.params;
+    .delete((req, res, next) => {
+        const { note_id } = req.params;
+        console.log(req.params)
         NotesService.deleteNote(
           req.app.get('db'),
-          id
+          note_id
         )
           .then(note => {
-            logger.info(`Note with id ${id} deleted.`)
+            logger.info(`Note with id ${note_id} deleted.`)
             res.status(204).end()
           })
           .catch(next)
