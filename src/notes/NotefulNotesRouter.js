@@ -9,10 +9,10 @@ const bodyParser = express.json()
 
 const serializeNote = notes => ({
     id: notes.id,
-    notes_name: xss(notes.notes_name),
-    date_modified: notes.date_modified,
+    name: xss(notes.name),
+    modified: notes.modified,
     content: xss(notes.content),
-    folder_id: notes.folder_id
+    folderId: notes.folderId
 });
 
 NotefulNotesRouter
@@ -20,7 +20,6 @@ NotefulNotesRouter
     
     .get((req, res, next) => {
     const knexInstance = req.app.get('db')
-    console.log(req.params)
     NotesService.listNotes(knexInstance)
         .then(notes => {
             res.json(notes)
@@ -29,10 +28,10 @@ NotefulNotesRouter
     })
 
     .post(bodyParser, (req, res, next) => {
-        const {notes_name, content, folder_id} = req.body
-        const newNote = {notes_name, content, folder_id}
+        const {name, content, folderId} = req.body
+        const newNote = {name, content, folderId}
 
-        for(const field of ['notes_name', 'content']) {
+        for(const field of ['notes_name', 'content', 'folderId']) {
             if(!newNote[field]) {
                 logger.error(`${field} is required`)
                 return res.status(400).send({
@@ -45,24 +44,24 @@ NotefulNotesRouter
             req.app.get('db'),
             newNote
             )
-            .then(note => {
-              logger.info(`Note with id ${note.id} created.`)
+            .then(notes => {
+              logger.info(`Note with id ${notes.id} created.`)
               res
                 .status(201)
-                .location(path.posix.join(req.originalUrl, `${note.id}`))
-                .json(serializeNote(note))
+                .location(path.posix.join(req.originalUrl, `${notes.id}`))
+                .json(serializeNote(notes))
             })
             .catch(next)
     })
 
 NotefulNotesRouter
-    .route('/:note_id')
+    .route('/:noteId')
     
 
     .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     console.log(req.params)
-    NotesService.getNoteById(knexInstance, req.params.note_id)
+    NotesService.getNoteById(knexInstance, req.params.noteId)
         .then(note => {
             if(!note) {
                 return res.status(404).json({
@@ -75,14 +74,13 @@ NotefulNotesRouter
     })
 
     .delete((req, res, next) => {
-        const { note_id } = req.params;
-        console.log(req.params)
+        const { noteId } = req.params;
         NotesService.deleteNote(
           req.app.get('db'),
-          note_id
+          noteId
         )
           .then(note => {
-            logger.info(`Note with id ${note_id} deleted.`)
+            logger.info(`Note with id ${noteId} deleted.`)
             res.status(204).end()
           })
           .catch(next)

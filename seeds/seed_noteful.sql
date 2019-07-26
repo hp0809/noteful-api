@@ -1,14 +1,14 @@
 TRUNCATE folders, notes RESTART IDENTITY CASCADE;
 
 INSERT INTO folders
-    (folder_name)
+    (name)
     VALUES
     ('Important'),
     ('Super'),
     ('Spangley');
 
 INSERT INTO notes  
-    (notes_name, folder_id, date_modified, content)
+    (name, folderId, modified, content)
     VALUES 
         ('Dogs', 1, '2019-01-03T00:00:00.000Z', 'auctor velit. Aliquam nisl.'),
         ('Cats', 2, '2018-08-15T23:00:00.000Z', 'auctor velit. Aliquam nisl. '),

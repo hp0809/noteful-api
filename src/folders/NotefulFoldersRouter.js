@@ -10,7 +10,7 @@ const bodyParser = express.json()
 
 const serializeFolder = folders => ({
     id: folders.id,
-    folder_name: xss(folders.folder_name),
+    name: xss(folders.name),
 })
 
 NotefulFoldersRouter
@@ -28,8 +28,8 @@ NotefulFoldersRouter
 
     
     .post(bodyParser, (req, res, next) => {
-        const folder_name = req.body
-        const newFolder = folder_name;
+        const name = req.body
+        const newFolder = name;
 
         if(!newFolder) {
             logger.error(`Name is required`)
@@ -47,41 +47,41 @@ NotefulFoldersRouter
             req.app.get('db'),
             newFolder
             )
-            .then(folder => {
-              logger.info(`Folder with id ${folder.id} & ${folder.folder_name} created.`)
+            .then(folders => {
+              logger.info(`Folder with id ${folders.id} & ${folders.name} created.`)
               res
                 .status(201)
-                .location(path.posix.join(`${folder.id}`))
-                .json(serializeFolder(folder))
+                .location(path.posix.join(`${folders.id}`))
+                .json(serializeFolder(folders))
             })
             .catch(next)
     })
 
 NotefulFoldersRouter
-    .route('/:folderId')
-
+    .route('/folder/:folderId')
+    
     .get((req, res, next) => {
         const knexInstance = req.app.get('db')
+        const { folderId } = req.params
         FoldersService.getFolderById(knexInstance, req.params.folderId)
-            .then(folder => {
-                if(!folder) {
+            .then(folders => {
+                if(!folders) {
                     logger.error(`Folder with id ${folderId} not found.`)
                     return res.status(404).json({
                         error: {message: `Folder does not exist`}
                         })
                     }
-                    res.json(folder)
+                    res.json(folders)
                 })
                 .catch(next)
     })
     .delete((req, res, next) => {
         const { folderId } = req.params;
-        console.log(req.params)
         FoldersService.deleteFolder(
           req.app.get('db'),
           folderId
         )
-          .then(folder => {
+          .then(folders => {
             logger.info(`Folder with id ${folderId} deleted.`)
             res.status(204).end()
           })

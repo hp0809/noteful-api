@@ -61,3 +61,8 @@
 {"message":"Folder with id 4 & Hello created.","level":"info"}
 {"message":"Folder with id 5 &  created.","level":"info"}
 {"message":"Folder with id 5 deleted.","level":"info"}
+{"message":"Folder with id 1 deleted.","level":"info"}
+{"message":"Folder with id 1 not found.","level":"error"}
+{"message":"Folder with id 4 & Hello created.","level":"info"}
+{"message":"Folder with id 5 & H created.","level":"info"}
+{"message":"Note with id 6 deleted.","level":"info"}
