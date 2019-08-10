@@ -12,7 +12,7 @@ const serializeNote = notes => ({
     name: xss(notes.name),
     modified: notes.modified,
     content: xss(notes.content),
-    folderId: notes.folderId
+    folderid: notes.folderid
 });
 
 NotefulNotesRouter
@@ -28,10 +28,10 @@ NotefulNotesRouter
     })
 
     .post(bodyParser, (req, res, next) => {
-        const {name, content, folderId} = req.body
-        const newNote = {name, content, folderId}
+        const {name, content, folderid} = req.body
+        const newNote = {name, content, folderid}
 
-        for(const field of ['notes_name', 'content', 'folderId']) {
+        for(const field of ['name', 'content', 'folderid']) {
             if(!newNote[field]) {
                 logger.error(`${field} is required`)
                 return res.status(400).send({
