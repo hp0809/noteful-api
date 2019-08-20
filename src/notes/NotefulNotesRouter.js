@@ -79,12 +79,16 @@ NotefulNotesRouter
           req.app.get('db'),
           noteId
         )
-          .then(note => {
+        .then(note => {
             logger.info(`Note with id ${noteId} deleted.`)
-            res.status(204).end()
+            console.log("note is ", note)
+            res.status(204).end();
           })
-          .catch(next)
-      })
+          .catch(err => {
+            next(err);
+          });
+      });
+          
     
 
 
