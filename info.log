@@ -72,3 +72,9 @@
 {"message":"Note with id 3 deleted.","level":"info"}
 {"message":"Note with id 2 deleted.","level":"info"}
 {"message":"Note with id 1 deleted.","level":"info"}
+{"message":"name is required","level":"error"}
+{"message":"Folder with id 1 & Hello created.","level":"info"}
+{"message":"Note with id 1 created.","level":"info"}
+{"message":"Folder with id 2 & H created.","level":"info"}
+{"message":"name is required","level":"error"}
+{"message":"Note with id 2 created.","level":"info"}
